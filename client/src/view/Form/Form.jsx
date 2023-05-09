@@ -1,10 +1,16 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Style from './Form.module.css'
 import axios from "axios";
 import { useSelector } from "react-redux";
+import { getGenres } from "../../redux/actions";
+import { useDispatch } from "react-redux";
+
 //ese value quiero que tome el valor de el estado por supuesto, por eso, form.name y esas cosas.
 const Form = () =>{
     const genres = useSelector(({genres}) => genres);
+    const dispatch = useDispatch();
+    console.log(genres)
+   
     const [ratingError, setRatingError] = useState('');
     const [form , setForm] = useState({
         name: '',
@@ -16,6 +22,11 @@ const Form = () =>{
         rating: '',
 
      })
+     useEffect(() =>{
+       
+        dispatch(getGenres());
+    }, []);
+
 
     const [error, setError] = useState({
         name: '',
@@ -125,9 +136,9 @@ setForm ({...form, [property]: value})
         <select className={Style.select}  onChange={changeGenres} name="genres" defaultValue='Seleccionar Genero' >
 
          <option value='Seleccionar Genero'>Seleccionar Genero</option>  
-         {genres.map((genre) =>( 
-                <option key = {genre.id} value={genre.name}>
-                    {genre.name}
+         {genres.map((g) =>( 
+                <option key = {g.id} value={g.name}>
+                    {g.name}
                     </option>
             ))}
         </select>

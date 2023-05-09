@@ -9,6 +9,7 @@ const postGames = async (name, description, platforms, image, released, rating) 
       name,
       description,
       platforms,
+      genres,
       image,
       released,
       rating,

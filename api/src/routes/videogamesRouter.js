@@ -38,7 +38,7 @@ videogamesRouter.get('/:id', async (req,res)=>{
 videogamesRouter.post('/', async (req,res) => {
 const { name, description, platforms, image, released, rating } = req.body;
 try {
-    const nuevoJuego = await postGames(name, description, platforms, image, released, rating);
+    const nuevoJuego = await postGames(name, description,genres, platforms, image, released, rating);
     res.status(200).json(nuevoJuego)
 } catch (error) {
     res.status(500).json({ error : error.message })

@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux"
 import { getGenres } from "../../redux/actions";
+
 import style from './GenreSelect.module.css'
 
 
@@ -10,6 +11,7 @@ import style from './GenreSelect.module.css'
 
 const GenreSelect = () =>{
     const genres = useSelector(({genres}) => genres);
+    console.log(genres)
     const dispatch = useDispatch();
 
 
