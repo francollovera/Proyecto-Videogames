@@ -6,14 +6,16 @@ import { useEffect } from "react";
 import Loading from "../Loading/Loading";
 
 function Detail  (){
+  //el useParams permite acceder a los parametros de la URL
     const params = useParams();
     const Detallejuego = useSelector((state) => state.detail)
     const dispatch = useDispatch();
-    console.log(Detallejuego)
+    
     
     
     useEffect(() => {
       dispatch(getDetail(params.id));
+      //actualiza el getDetail con el detalle de el videojuego
     
     }, [dispatch,params.id])
     

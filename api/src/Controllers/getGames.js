@@ -35,7 +35,7 @@ console.log(dbGames)
         name: game.name,
         image: game.background_image,
         genres: game.Genres?.map((gen) => gen.name),
-        platforms: game.platforms?.map((plat) => plat.platform.name),
+        // platforms: game.platforms?.map((plat) => plat.platform.name),
         released: game.released,
         rating: game.rating,
       };

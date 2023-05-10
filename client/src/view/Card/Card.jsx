@@ -11,7 +11,7 @@ const Card = ({game}) =>{
 
     return(  
         <div className={style.container}>
-        <Link to={`/videogames/${game.id}`} className={style.link}><p>{game.name}  </p></Link>
+        <Link to={`/videogames/${game.id}`} className={style.link}><p>{game.name}</p></Link>
         
         <img className={style.image} src={game.image} alt='lala'/> 
         <p>{'Genres: '}{game.genres}</p>

@@ -1,11 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux"
 import { getGenres } from "../../redux/actions";
-
 import style from './GenreSelect.module.css'
-
-
-
 
 
 

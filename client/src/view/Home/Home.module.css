@@ -16,5 +16,11 @@
 .orden{
   margin-left: 10px;
   margin-bottom: 30px;
-  
+  border-radius: 10px;
+  background-color: rgb(103, 103, 161);
+  text-align: center;
+}
+.orden:hover{
+  cursor: pointer;
+  box-shadow: 0 0 0 0.2 white;
 }

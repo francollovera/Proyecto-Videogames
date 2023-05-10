@@ -14,7 +14,10 @@ function Paginado({ gamesPerPage, videogames, paginado }) {
         <div className={style.paginado}>
           {pageNumbers.map((number) => (
             <div key={number} className={style.number}>
-              <a className={style.link} href="#" onClick={() => paginado(number)}>{number}</a>
+
+              {/* le paso al paginado el numero de pagina */}
+              <a className={style.link} href="#" onClick={() => paginado(number)}>{number}
+              </a>
             </div>
           ))}
         </div>

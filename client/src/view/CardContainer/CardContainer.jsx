@@ -5,9 +5,6 @@ import Loading from '../Loading/Loading';
 
 function CardContainer ({videogames}){
 
-   
-    
-
 const Listagames = videogames;
 console.log(Listagames)
  //este es el estado global que ve CardContainer esperando que en el estado global este el array de videogames. Osea useSeelctor va a buscar ese videogames a mi estado global

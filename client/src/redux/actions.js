@@ -1,9 +1,7 @@
-// redux me proporciona un estado global, y cualquier componente que lo necesite puede hacer uso de este estado global(es un objeto el estado global, un OBJETO) en cualquier parte de mi aplicacion, eso es lo que hace redux;
-// Quiero que en mi estado global por supuesto este mi array de videogames.
+
 //  el unico que puede cambiar el estado global es la funcion reducer o señor reducer.
 // Para ello le envio una instruccion de que es lo que quiero que haga por medio de action que tiene un type y describa lo que haga.
-//Por supuesto el mas interesado es card Container, esperando que en el estado global este el array de videogames y pueda leerlo y renderizarlo.
-// Home es el que pide a redux que haga un cambio, pero a cardcontainer es el componente interesado, a home no le importa que hay ahi, solo le pide y el estado global de redux le envia a cardcontainer
+
 
 import axios from 'axios';
 
@@ -22,7 +20,7 @@ export const ORDER_BY_ORIGIN = 'ORDER_BY_ORIGIN';
 
 
 export const getVideogames = () =>{
-   
+   //cuando llamo a getVideogames se crea un objeto de typo GET_VIDEOGAMES
     return async function (dispatch){
         const apiData = await axios.get(`http://localhost:3001/videogames`);
     
@@ -42,13 +40,13 @@ export const postVideogames = () =>{
 };
 
 export const getDetail = (id) =>{
-    console.log(id)
+    
     return async function (dispatch){
         const apiData = await axios.get (
             `http://localhost:3001/videogames/${id}`
         );
         const gamesid = apiData.data;
-        console.log(gamesid)
+        
         dispatch ({type: GET_DETAIL, payload: gamesid});
     }};
 
@@ -72,6 +70,7 @@ export const getGenres = () =>{
                 dispatch ({type: GET_GENRES, payload: genres});
 
 }};
+//desde el home enviamos el value
 export const getnamesbyGenre = (value) =>{
        return ({type: GET_NAMES_BY_GENRE, payload: value})
 

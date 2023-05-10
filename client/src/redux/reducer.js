@@ -21,12 +21,14 @@ const initialState ={ //al arrancar tiene un array vacio y este es mi estado glo
     numPage : 1,
     videogames:[],
     allvideogames :[],
+    todosvideogames:[],
     detail:[],
     videogamesbyname:[],
     genres: [],
     filtrado: [],
     filtered: [],
     order: 'asc',
+    orderd: 'asd',
 };
 const rootReducer = (state = initialState, action) => {
     switch(action.type){
@@ -34,7 +36,8 @@ const rootReducer = (state = initialState, action) => {
   return {
     ...state,
     videogames: action.payload,
-    allvideogames: action.payload
+    allvideogames: action.payload,
+    todosvideogames: action.payload
   };
    //esto si ahora impacta el estado global, y el estado que la estaba mirando es cardcontainer.
             
@@ -54,6 +57,8 @@ const rootReducer = (state = initialState, action) => {
                  case GET_GENRES:
                     return { ...state, genres: action.payload }
                  ;
+
+                 //home le pasa ese action.payload
                  case GET_NAMES_BY_GENRE: { 
                     let value = action.payload;
                     value === 'All' ? value= state.allvideogames :
@@ -67,16 +72,22 @@ const rootReducer = (state = initialState, action) => {
                   
                     case ORDER_BY_NAME:
                     let sortedArr = action.payload === 'asc' ?
-                    state.allvideogames.sort(function(a,b){
+                    state.todosvideogames.sort(function(a,b){
+
+                        //metodo sort: ordena los elementos de forma ascendente o descendiente conun criterio especifico
+                        //ORDEN Z-A
+
                         if(a.name > b.name){
-                            return 1;
+                            return 1; // si este numero es positivo, b.name deberia estar primero
                         }
                         if(b.name > a.name){
                             return -1;
                         }
                         return 0;
                     }) :
-                    state.allvideogames.sort(function(a,b ){
+
+                    //ORDEN A-Z
+                    state.todosvideogames.sort(function(a,b ){
                         if(a.name > b.name){
                             return -1;
                         }
@@ -87,10 +98,10 @@ const rootReducer = (state = initialState, action) => {
                     })
                     return {
                         ...state,
-                        allvideogames :sortedArr
+                        todosvideogames :sortedArr
                     }
                     case ORDER_BY_RATING:
-                        let sArr = action.payload === 'asc' ?
+                        let sArr = action.payload === 'asd' ?
                         state.allvideogames.sort(function(a,b){
                             if(a.rating > b.rating){
                                 return 1;
@@ -115,13 +126,15 @@ const rootReducer = (state = initialState, action) => {
                         }
                         case ORDER_BY_ORIGIN:
                         let filterorigin ;
-                        if(action.payload === "Select Option "){
+                        if(action.payload === "Select Option Origin"){
                             filterorigin = state.allvideogames;
                             return filterorigin;
                         }
                         if(action.payload === "Local"){
                             filterorigin = state.allvideogames.filter(
                                 (allvideogame) => typeof allvideogame.id === "string"
+                                
+                                
                             )
                         }
                         if(action.payload === "Api"){
