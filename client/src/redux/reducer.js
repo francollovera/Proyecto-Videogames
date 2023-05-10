@@ -124,24 +124,22 @@ const rootReducer = (state = initialState, action) => {
                             ...state,
                             allvideogames :sArr
                         }
-                        case ORDER_BY_ORIGIN:
-                        let filterorigin ;
-                        if(action.payload === "Select Option Origin"){
-                            filterorigin = state.allvideogames;
-                            return filterorigin;
+                        case ORDER_BY_ORIGIN: {
+                            const {allvideogames} = state;
+                            let response;
+                            const juegogamesdb = allvideogames.filter(videogame => typeof videogame.id === 'string')
+                            const gamesapi = allvideogames.filter(videogame => typeof videogame.id === 'number')
+                            if(action.payload == 'Api') response = gamesapi;
+                            if(action.payload == 'Local') response = juegogamesdb;
+                            if(action.payload == 'Select Option Origin') response = allvideogames;
+
+                            return{
+                                ...state,
+                                videogames: response 
+                            }
                         }
-                        if(action.payload === "Local"){
-                            filterorigin = state.allvideogames.filter(
-                                (allvideogame) => typeof allvideogame.id === "string"
-                                
-                                
-                            )
-                        }
-                        if(action.payload === "Api"){
-                            filterorigin = state.allvideogames.filter(
-                                (allvideogame) => typeof allvideogame.id === "number"
-                            )
-                        }
+                        
+
                         
   
                         

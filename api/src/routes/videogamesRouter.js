@@ -1,5 +1,5 @@
 const {Router}= require('express');
-const { getGames } = require('../Controllers/getGames')
+const { concat } = require('../Controllers/getGames')
 const { postGames } = require('../Controllers/postGames')
 const { getGamesid } = require('../Controllers/getGamesid')
 const { getNames } = require('../Controllers/getNames')
@@ -19,7 +19,7 @@ videogamesRouter.get('/', async (req, res) => {
       response = await getNames(name);
       res.status(200).send(response);
     } else {
-      response = await getGames();
+      response = await concat();
       res.status(200).json(response);
     }
   } catch (error) {

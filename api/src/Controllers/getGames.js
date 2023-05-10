@@ -5,70 +5,46 @@ const { API_KEY } = process.env;
 const axios = require('axios');
 const { Videogame, Genres } = require('../db');
 
+
+
+
 const getGames = async () => {
-  try {
-    let allGames = [];
-
-    for (let i = 1; i <= 5; i++) {
-      const apiGames = await axios.get(`https://api.rawg.io/api/games?key=${API_KEY}&page=${i}`);
-      const games = apiGames.data.results;
-      allGames = allGames.concat(games);
-    
-    }
-    
-
-    const dbGames = await Videogame.findAll(
-      { 
-      include: {
-        model : Genres,
-        attributes: ["name"],
-        through : {
-          attributes: [],
-        }
-      }
-      }
-    );
-console.log(dbGames)
-    const gamedB = dbGames.map((game) => {
+  let page = 1;
+  let allGames = []
+  while(page < 6){
+    const dataApi = await axios.get(`https://api.rawg.io/api/games?key=${API_KEY}&page=${page}`)
+    const gameApi = dataApi.data.results.map((game) => {
       return {
-        id: game.id,
-        name: game.name,
-        image: game.background_image,
-        genres: game.Genres?.map((gen) => gen.name),
-        // platforms: game.platforms?.map((plat) => plat.platform.name),
-        released: game.released,
-        rating: game.rating,
-      };
-    });
-
-    
-
-    const gameApi = allGames.map((game) => {
-      return {
-        id: game.id,
-        name: game.name,
-        image: game.background_image,
-        genres: game.genres?.map((gen) => gen.name),
-        platforms: game.platforms?.map((plat) => plat.platform.name),
-        released: game.released,
-        rating: game.rating,
-      };
-    });
-
-    allGames = gameApi.concat(gamedB);
-
-    if (allGames) {
-      console.log(gameApi);
-      return gameApi;
-    } else {
-      throw Error('Juegos no encontrados');
-    }
-  } catch (error) {
-    console.log(error);
+      id: game.id,
+      name: game.name,
+      image: game.background_image,
+      genres: game.genres?.map((gen) => gen.name),
+      platforms: game.platforms?.map((plat) => plat.platform.name),
+      released: game.released,
+      rating: game.rating,
+    };
+  });
+    allGames = allGames.concat(gameApi);
+    page++
   }
+
+  return allGames;
 };
 
-module.exports = { getGames };
+const databaseGames = async () =>{
+return await Videogame.findAll({
+  include : { model: Genres, attributes: ['name'], through: {attributes: []}, attributes: {exclude: ['updatedAt', 'createdAt', 'id']}}
+})
+
+}
+const concat = async () => {
+const dataApi = await getGames()
+const datadb = await databaseGames()
+const alldata = [...dataApi, ...datadb];
+return alldata;
+}
+
+module.exports = { concat };
 
 
 

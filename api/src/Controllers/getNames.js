@@ -2,12 +2,12 @@ require('dotenv').config();
 const { API_KEY } = process.env;
 const axios = require('axios');
 
-const { getGames } = require('./getGames')
+const { concat } = require('./getGames')
 
 
 const getNames = async (name) => {
  
-    const juegos = await getGames();
+    const juegos = await concat();
     if(name){
       const filtrado = juegos.filter((game) => game.name.toLowerCase().includes(name.toLowerCase()))
       .splice(0, 15);
