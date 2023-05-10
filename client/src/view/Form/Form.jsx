@@ -7,31 +7,31 @@ import { useDispatch } from "react-redux";
 
 //ese value quiero que tome el valor de el estado por supuesto, por eso, form.name y esas cosas.
 const Form = () =>{
-    const genres = useSelector(({genres}) => genres);
-    const dispatch = useDispatch();
-    console.log(genres)
+    // const genres = useSelector(({genres}) => genres);
+    // const dispatch = useDispatch();
+    // console.log(genres)
    
     const [ratingError, setRatingError] = useState('');
     const [form , setForm] = useState({
         name: '',
         description:'',
-        genres:[],
+        // genres:[],
         platforms: [],
         image: '',
         released: '',
         rating: '',
 
      })
-     useEffect(() =>{
+    //  useEffect(() =>{
        
-        dispatch(getGenres());
-    }, []);
+    //     dispatch(getGenres());
+    // }, []);
 
 
     const [error, setError] = useState({
         name: '',
         description:'',
-        genres:[],
+        // genres:[],
         platforms: [],
         image: '',
         released: '',
@@ -63,12 +63,12 @@ const Form = () =>{
     
       }
 
-      const changeGenres = (event) =>{
+    //   const changeGenres = (event) =>{
     
-        setForm ({...form, genres :[...form.genres, event.target.value]})       //para poder modificar la propiedad property por el valor de mi nuevo estado.
+    //     setForm ({...form, genres :[...form.genres, event.target.value]})       //para poder modificar la propiedad property por el valor de mi nuevo estado.
         
        
-          }
+    //       }
     const changeHandler = (event) =>{
 const property = event.target.name; //event me dice quien fue quien disparo el evento.
 const value = event.target.value;
@@ -89,11 +89,11 @@ setForm ({...form, [property]: value})
         platforms.splice(index, 1);
         setForm({...form, platforms});
     }
-    const deleteGenres = (index) => {
-        const genres = [...form.genres];
-        genres.splice(index, 1);
-        setForm({...form, genres});
-    }
+    // const deleteGenres = (index) => {
+    //     const genres = [...form.genres];
+    //     genres.splice(index, 1);
+    //     setForm({...form, genres});
+    // }
 
     return(  
         <div className={Style.content}>
@@ -132,7 +132,7 @@ setForm ({...form, [property]: value})
                         ))}
                     </div>
                     <div>
-        <label className={Style.valores}>Genres: </label>
+        {/* <label className={Style.valores}>Genres: </label>
         <select className={Style.select}  onChange={changeGenres} name="genres" defaultValue='Seleccionar Genero' >
 
          <option value='Seleccionar Genero'>Seleccionar Genero</option>  
@@ -141,14 +141,14 @@ setForm ({...form, [property]: value})
                     {g.name}
                     </option>
             ))}
-        </select>
+        </select> */}
         
-        {form.genres.map((genre, index) => (
+        {/* {form.genres.map((genre, index) => (
                             <div key={index}>
                                 <p className={Style.parrafo}>{genre}</p>
                                 <button className={Style.buttoneliminar}type="button" onClick={() => deleteGenres(index)}>X</button>
                             </div>
-                        ))}
+                        ))} */}
                     </div>
          
 

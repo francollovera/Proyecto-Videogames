@@ -15,9 +15,12 @@ console.log(Listagames)
 return(  
 <div className={style.container}>
   
-    {Listagames?.map((game) => <Card game={game} />)}
-  
-   
+{Listagames.length > 0
+ ? 
+ Listagames.map((game) => <Card game={game} />)
+:
+ <Loading />}
+
   
 </div>
 );
