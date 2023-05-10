@@ -3,7 +3,7 @@
 require('dotenv').config();
 const { API_KEY } = process.env;
 const axios = require('axios');
-const { Videogame } = require('../db');
+const { Videogame, Genres } = require('../db');
 
 const getGames = async () => {
   try {
@@ -17,8 +17,31 @@ const getGames = async () => {
     }
     
 
-    const dbGames = await Videogame.findAll();
-    allGames = allGames.concat(dbGames);
+    const dbGames = await Videogame.findAll(
+      { 
+      include: {
+        model : Genres,
+        attributes: ["name"],
+        through : {
+          attributes: [],
+        }
+      }
+      }
+    );
+console.log(dbGames)
+    const gamedB = dbGames.map((game) => {
+      return {
+        id: game.id,
+        name: game.name,
+        image: game.background_image,
+        genres: game.Genres?.map((gen) => gen.name),
+        platforms: game.platforms?.map((plat) => plat.platform.name),
+        released: game.released,
+        rating: game.rating,
+      };
+    });
+
+    
 
     const gameApi = allGames.map((game) => {
       return {
@@ -31,6 +54,8 @@ const getGames = async () => {
         rating: game.rating,
       };
     });
+
+    allGames = gameApi.concat(gamedB);
 
     if (allGames) {
       console.log(gameApi);

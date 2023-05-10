@@ -3,6 +3,8 @@ const { getGames } = require('../Controllers/getGames')
 const { postGames } = require('../Controllers/postGames')
 const { getGamesid } = require('../Controllers/getGamesid')
 const { getNames } = require('../Controllers/getNames')
+const { Genresgames } = require("../db")
+const {Genres} = require("../db")
 
 const videogamesRouter = Router();
 // tiene que ser Json para poder ser enviado en el cuerpo de la respuesta del servidor al cliente.
@@ -36,9 +38,16 @@ videogamesRouter.get('/:id', async (req,res)=>{
     }});
 
 videogamesRouter.post('/', async (req,res) => {
-const { name, description, platforms, image, released, rating } = req.body;
+const { name, description, platforms, image, genres, released, rating } = req.body;
 try {
-    const nuevoJuego = await postGames(name, description, platforms, image, released, rating);
+    const nuevoJuego = await postGames(name, description, platforms, image, genres, released, rating);
+    const genresDb = await Genres.findAll({
+      where: {
+        name: genres
+       }
+      
+    })
+    nuevoJuego.addGenres(genresDb)
     res.status(200).json(nuevoJuego)
 } catch (error) {
     res.status(500).json({ error : error.message })

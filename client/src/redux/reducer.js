@@ -13,6 +13,7 @@ import { GET_VIDEOGAMESNAME } from './actions';
 import { GET_GENRES } from './actions';
 import {GET_NAMES_BY_GENRE} from './actions';
 import { ORDER_BY_NAME } from './actions';
+import { ORDER_BY_ORIGIN } from './actions';
 
 
 
@@ -26,8 +27,6 @@ const initialState ={ //al arrancar tiene un array vacio y este es mi estado glo
     filtrado: [],
     filtered: [],
     order: 'asc',
-    
-
 };
 const rootReducer = (state = initialState, action) => {
     switch(action.type){
@@ -114,6 +113,23 @@ const rootReducer = (state = initialState, action) => {
                             ...state,
                             allvideogames :sArr
                         }
+                        case ORDER_BY_ORIGIN:
+                        let filterorigin ;
+                        if(action.payload === "Select Option "){
+                            filterorigin = state.allvideogames;
+                            return filterorigin;
+                        }
+                        if(action.payload === "Local"){
+                            filterorigin = state.allvideogames.filter(
+                                (allvideogame) => typeof allvideogame.id === "string"
+                            )
+                        }
+                        if(action.payload === "Api"){
+                            filterorigin = state.allvideogames.filter(
+                                (allvideogame) => typeof allvideogame.id === "number"
+                            )
+                        }
+                        
   
                         
                       default:

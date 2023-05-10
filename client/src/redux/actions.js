@@ -16,6 +16,7 @@ export const GET_GENRES = 'GET_GENRES';
 export const GET_NAMES_BY_GENRE = 'GET_NAMES_BY_GENRE';
 export const ORDER_BY_NAME = 'ORDER_BY_NAME';
 export const ORDER_BY_RATING = 'ORDER_BY_RATING';
+export const ORDER_BY_ORIGIN = 'ORDER_BY_ORIGIN';
 
 
 
@@ -88,5 +89,12 @@ export const orderByName = (payload) => {
     return {
       type: 'ORDER_BY_RATING',
       payload,
+    };
+  };
+
+  export const orderByOrigin = (status) => {
+    return {
+      type: 'ORDER_BY_ORIGIN',
+      payload: status,
     };
   };

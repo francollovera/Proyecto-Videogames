@@ -1,10 +1,7 @@
 import CardContainer from "../CardContainer/CardContainer";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getVideogames, getnamesbyGenre, orderByRating } from "../../redux/actions";
-
-import { orderByName } from '../../redux/actions';
-
+import { getVideogames, getnamesbyGenre, orderByRating, orderByName, orderByOrigin } from "../../redux/actions";
 import style from './Home.module.css';
 import { useState } from "react";
 import  GenreSelect  from '../GenreSelect/GenreSelect';
@@ -80,6 +77,14 @@ const Home = () => {
             <option value="asc">Menor</option>
             <option value="desc">Mayor</option>
 
+        </select>
+        <label>Origin</label>
+        <select onChange={(e) => dispatch(orderByOrigin(e.target.value))} >
+    {["Select Option", "Api", "Local"].map((e , i) => (
+      <option value={e} key={i}>
+      {e}
+      </option>
+    ))}
         </select>
         
 

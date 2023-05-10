@@ -29,7 +29,7 @@ describe('Videogames route', () => {
       .get('/videogames')
       .end((err, res) => {
         expect(res).to.have.status(200);
-        expect(res.body).to.be.an('array');
+        expect(res.body).to.be.an('array'); //espera un array
         done();
       });
   });
@@ -41,7 +41,7 @@ describe('Videogames route', () => {
       .end((err, res) => {
         expect(res).to.have.status(200);
         expect(res.body).to.be.an('array');
-        expect(res.body[0].name).to.equal(name);
+        expect(res.body[0].name).to.equal(name); //que el primer nombre sea igual a mi const name
         done();
       });
   });
@@ -67,7 +67,7 @@ describe('Videogames routes', () => {
       platforms: ['PC'],
       image: 'https://example.com/image.jpg',
       released: '2023-01-01',
-      rating: 8.5,
+      rating: 4.5,
     };
 
     const response = await chai.request(app)
@@ -80,10 +80,10 @@ describe('Videogames routes', () => {
   describe('GET /videogames/:id', () => {
     it('should return a specific videogame by id', (done) => {
       chai.request(app)
-        .get(`/videogames/${videogameId}`)
+        .get(`/videogames/${videogameId}`) //aqui les estoy pasando el id que use en el before
         .end((err, res) => {
           expect(res).to.have.status(200);
-          expect(res.body).to.be.an('object');
+          expect(res.body).to.be.an('array'); //array porque es un juego solo porque el id es unico
           expect(res.body.id).to.equal(videogameId);
           done();
         });
@@ -108,7 +108,7 @@ describe('Videogames routes', () => {
         platforms: ['PS5', 'Xbox Series X'],
         image: 'https://example.com/another-image.jpg',
         released: '2023-02-01',
-        rating: 9.0,
+        rating: 3.6
       };
 
       chai.request(app)
@@ -127,11 +127,11 @@ describe('Videogames routes', () => {
         });
     });
 
-    it('should handle errors when required fields are missing', (done) => {
+    it('should handle errors when required fields are missing', (done) => { //faltan campos
       const invalidVideogame = {
         name: 'Invalid Game',
         description: 'This is an invalid videogame',
-        platforms: ['PC'],
+        platforms: ['PC']
       };
 
       chai.request(app)
