@@ -1,4 +1,4 @@
-
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
 .container {
      background: linear-gradient(to bottom, #878889, #1d2d5c);
     display: flex;
@@ -37,10 +37,21 @@
     
     
   }
-
+  .genres{
+    font-family: 'Roboto', sans-serif;
+    color : rgb(216, 212, 212);
+  
+  }
+  .link{
+    text-decoration: none;
+    font-family: 'Roboto', sans-serif;
+    color: rgb(240, 238, 238);
+    font-size: 12px;
+    font-weight: 400;
+  }
   .link:hover {
-    color: white;
-    text-shadow: 0 0 5px white;
+    color: rgb(6, 151, 209);
+    text-shadow: 0 0 5px rgb(19, 18, 18);
     transition: transform 0.5s ease-in-out, background 1.5s ease-in-out;
     cursor: pointer;
   }

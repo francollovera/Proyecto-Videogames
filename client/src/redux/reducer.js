@@ -148,19 +148,11 @@ const rootReducer = (state = initialState, action) => {
         allvideogames: state.originalVideogames,
         todosvideogames: state.originalVideogames
       };
-                        
-
-                        
-  
-                        
+     
                       default:
                         return{...state}
                     }
-                  
-              
-                         
-
-           
+   
     };
     
 

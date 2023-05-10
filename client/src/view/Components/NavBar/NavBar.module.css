@@ -1,4 +1,4 @@
-
+@import url('https://fonts.googleapis.com/css2?family=Bangers&family=Roboto:wght@500&display=swap');
 .mainContainer {
   display: flex;
   justify-content: space-around;
@@ -8,14 +8,17 @@
   padding: 6px;
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
   border-bottom: #140404 2px;
+  font-family: 'Bangers', cursive;
+
   
 }
 
 .mainContainer a {
-  color: #140404;
+  color: rgb(235, 229, 229);
   text-decoration: none;
-  font-size: 18px;
+  font-size: 22px;
   margin-left: 20px;
+  letter-spacing: 0.1rem;
 }
 .mainContainer a:hover {
   color: white;
