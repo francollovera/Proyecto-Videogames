@@ -1,7 +1,7 @@
 import CardContainer from "../CardContainer/CardContainer";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getVideogames, getnamesbyGenre, orderByRating, orderByName, orderByOrigin } from "../../redux/actions";
+import { getVideogames, getnamesbyGenre, orderByRating, orderByName, orderByOrigin, resetVideogames } from "../../redux/actions";
 import style from './Home.module.css';
 import { useState } from "react";
 import GenreSelect from '../GenreSelect/GenreSelect';
@@ -100,6 +100,11 @@ const Home = () => {
           ))}
         </select>
 
+        <button className={style.orden} onClick={() => dispatch(resetVideogames())}>Refresh</button>
+          
+            
+           
+
 
 
         {/* ahi no quiero que me haga el map de el current character, no de todos los videogames */}
@@ -109,7 +114,7 @@ const Home = () => {
           videogames={videogames.length}
           paginado={paginado} />
 
-      </>
+     </>
     </div>
   );
 };

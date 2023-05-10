@@ -14,6 +14,7 @@ import { GET_GENRES } from './actions';
 import {GET_NAMES_BY_GENRE} from './actions';
 import { ORDER_BY_NAME } from './actions';
 import { ORDER_BY_ORIGIN } from './actions';
+import { RESET_VIDEOGAMES } from './actions';
 
 
 
@@ -29,6 +30,7 @@ const initialState ={ //al arrancar tiene un array vacio y este es mi estado glo
     filtered: [],
     order: 'asc',
     orderd: 'asd',
+    originalVideogames: [],
 };
 const rootReducer = (state = initialState, action) => {
     switch(action.type){
@@ -37,7 +39,8 @@ const rootReducer = (state = initialState, action) => {
     ...state,
     videogames: action.payload,
     allvideogames: action.payload,
-    todosvideogames: action.payload
+    todosvideogames: action.payload,
+    originalVideogames: action.payload
   };
    //esto si ahora impacta el estado global, y el estado que la estaba mirando es cardcontainer.
             
@@ -138,6 +141,13 @@ const rootReducer = (state = initialState, action) => {
                                 videogames: response 
                             }
                         }
+                        case RESET_VIDEOGAMES:
+      return {
+        ...state,
+        videogames: state.originalVideogames,
+        allvideogames: state.originalVideogames,
+        todosvideogames: state.originalVideogames
+      };
                         
 
                         

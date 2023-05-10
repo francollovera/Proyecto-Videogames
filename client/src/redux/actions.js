@@ -15,6 +15,7 @@ export const GET_NAMES_BY_GENRE = 'GET_NAMES_BY_GENRE';
 export const ORDER_BY_NAME = 'ORDER_BY_NAME';
 export const ORDER_BY_RATING = 'ORDER_BY_RATING';
 export const ORDER_BY_ORIGIN = 'ORDER_BY_ORIGIN';
+export const RESET_VIDEOGAMES = 'RESET_VIDEOGAMES';
 
 
 
@@ -96,4 +97,7 @@ export const orderByName = (payload) => {
       type: 'ORDER_BY_ORIGIN',
       payload: status,
     };
+  };
+  export const resetVideogames = () => {
+    return { type: RESET_VIDEOGAMES };
   };

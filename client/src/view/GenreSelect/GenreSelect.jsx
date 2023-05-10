@@ -7,7 +7,7 @@ import style from './GenreSelect.module.css'
 
 const GenreSelect = () =>{
     const genres = useSelector(({genres}) => genres);
-    console.log(genres)
+    
     const dispatch = useDispatch();
 
 
