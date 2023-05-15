@@ -1,11 +1,12 @@
 import CardContainer from "../CardContainer/CardContainer";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getVideogames, getnamesbyGenre, orderByRating, orderByName, orderByOrigin, resetVideogames } from "../../redux/actions";
+import { getVideogames, getnamesbyGenre, orderByRating, orderByName, orderByOrigin, resetVideogames, clear_detail, set_Currents_Page, Pagination } from "../../redux/actions";
 import style from './Home.module.css';
 import { useState } from "react";
 import GenreSelect from '../GenreSelect/GenreSelect';
 import Paginado from "../Paginate/Paginate";
+
 
 
 
@@ -14,10 +15,12 @@ import Paginado from "../Paginate/Paginate";
 
 const Home = () => {
   const dispatch = useDispatch(); 
+ 
   //actualizamos el estado con useDispatch;
 
   const videogames = useSelector((state) => state.videogames);
-  console.log(videogames)
+  
+  
   const [orden, setOrden] = useState('')
   const [currentePage, setCurrentPage] = useState(1); 
   //mi pagina actual
@@ -29,20 +32,47 @@ const Home = () => {
   const currentCards = videogames.slice(indexofFirstCard, indexofLastCard); 
   //los personajes que estan en la pagina actual y le hago un 'corte' y toma una porcion dependiendo lo que yo le paso por pasarametro, en este caso el indice de la ultima card y el inidice del ultimo personaje.
 
+
+  //me pasan un numero de pagina y seteo mi pagina en ese numero de paguna
   const paginado = (pageNumber) => {
-
-    //me pasan un numero de pagina y seteo mi pagina en ese numero de paguna
-
+    
+    setCurrentPage(dispatch(Pagination()))
     setCurrentPage(pageNumber)
-  }
+}
+    
 
+    
+ 
+
+
+  // ---------------------------------USE EFFECTS-------------------------------------------
   useEffect(() => {
 
     //llamo funcion get
     dispatch(getVideogames());
   }, [dispatch]);
 
-// -------------------FUNCIONESDEFILTROS-----------------------------------------------
+  
+  // useEffect(() => {
+  //   dispatch(resetVideogames());
+  // }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(clear_detail());
+  }, [dispatch]);
+
+  
+
+  useEffect(() => {
+    dispatch(set_Currents_Page(setCurrentPage))
+
+  }, [dispatch])
+  
+  
+  
+
+  
+// -------------------FUNCIONES DE FILTROS-----------------------------------------------
 
   const handleChange = (e) => {
     dispatch(getnamesbyGenre(e.target.value))
@@ -55,6 +85,7 @@ const Home = () => {
     setCurrentPage(1)
     setOrden(`Ordenado ${e.target.value}`)
   }
+
   function handleS(e) {
     e.preventDefault();
     dispatch(orderByRating(e.target.value))
@@ -101,20 +132,17 @@ const Home = () => {
         </select>
 
         <button className={style.orden} onClick={() => dispatch(resetVideogames())}>Refresh</button>
-          
-            
-           
-
-
-
+       
         {/* ahi no quiero que me haga el map de el current character, no de todos los videogames */}
         <CardContainer videogames={currentCards} />
-
-        <Paginado gamesPerPage={gamesPerPage}
+            
+        {
+          videogames.length >15 ? <Paginado
+         gamesPerPage={gamesPerPage}
           videogames={videogames.length}
-          paginado={paginado} />
-
+          paginado={paginado} /> : null}
      </>
+     
     </div>
   );
 };

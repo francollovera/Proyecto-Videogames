@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
  
 const Card = ({game}) =>{
-    //recibe props muestra props, es un componente presentacional unicamente
+    
 
     
 
@@ -13,7 +13,7 @@ const Card = ({game}) =>{
         <div className={style.container}>
         <Link to={`/videogames/${game.id}`} className={style.link}><p>{game.name}</p></Link>
         
-        <img className={style.image} src={game.image} alt='lala'/> 
+        <img className={style.image} src={game.image} alt={game.image}/> 
         <p className={style.genres}>{'Genres: '}{game.genres}</p>
         
  

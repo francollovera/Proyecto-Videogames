@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { getVideogames, getVideogamesname } from "../../redux/actions";
+import { getVideogames, getVideogamesname, set_Currents_Page } from "../../redux/actions";
 import { useState } from "react";
 
 import style from './Searchbar.module.css';
@@ -13,6 +13,7 @@ export default function SearchBar(props){
 
     const videogames = useSelector((state) => state.videogames);
     const videogamesbyname = useSelector((state) => state.videogamesbyname);
+    // const setCurrentPage = useSelector((state) => state.setCurrentPage)
     
     // -------------------------------HANDLERS--------------------------------
 
@@ -23,7 +24,7 @@ export default function SearchBar(props){
     const handleSearch = (e) =>{
         e.preventDefault();
         dispatch(getVideogamesname(value))
-        props.setCurrentPage();
+        set_Currents_Page();
     }
     const handleClick = () =>{
         dispatch(getVideogames());

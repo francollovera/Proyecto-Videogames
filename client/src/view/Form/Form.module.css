@@ -97,6 +97,15 @@
     text-align: center;
     margin-right: 0.5rem;
   }
+  .description{ 
+    height: auto;
+    min-height: 50px; /* Establece una altura mínima inicial según tus necesidades */
+    margin-top: 15px;
+    margin-bottom: 10px;
+    font-weight: bold;
+    text-align: center;
+    margin-right: 0.5rem;
+  }
 
   .boton{
     margin-bottom: 25px;

@@ -16,18 +16,27 @@ export const ORDER_BY_NAME = 'ORDER_BY_NAME';
 export const ORDER_BY_RATING = 'ORDER_BY_RATING';
 export const ORDER_BY_ORIGIN = 'ORDER_BY_ORIGIN';
 export const RESET_VIDEOGAMES = 'RESET_VIDEOGAMES';
+export const CLEAR_DETAIL = 'CLEAR_DETAIL';
+export const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
+export const PAGINATION = 'PAGINATION';
 
 
 
 
 export const getVideogames = () =>{
-   //cuando llamo a getVideogames se crea un objeto de typo GET_VIDEOGAMES
+   
     return async function (dispatch){
-        const apiData = await axios.get(`http://localhost:3001/videogames`);
+        const response = await axios.get(`http://localhost:3001/videogames`);
+        const cleanVideogame = response.data.map((videogame) => {
+          if (typeof videogame.id === "string") {
+            let genres = [];
+            videogame.genres.map((genre) => genres.push(genre.name));
+            videogame.genres = genres;
+          }
+          return videogame;
+        });
     
-    const getVideogames = apiData.data;
-    
-    dispatch({ type: GET_VIDEOGAMES, payload: getVideogames })
+    dispatch({ type: GET_VIDEOGAMES, payload: cleanVideogame })
 }};
 
 export const postVideogames = () =>{
@@ -43,12 +52,20 @@ export const postVideogames = () =>{
 export const getDetail = (id) =>{
     
     return async function (dispatch){
-        const apiData = await axios.get (
+        const response = await axios.get (
             `http://localhost:3001/videogames/${id}`
         );
-        const gamesid = apiData.data;
+      
+        const cleanVideogame = response.data.map((videogame) => {
+          if (typeof videogame.id === "string") {
+            let genres = [];
+            videogame.genres.map((genre) => genres.push(genre.name));
+            videogame.genres = genres;
+          }
+          return videogame;
+        });
         
-        dispatch ({type: GET_DETAIL, payload: gamesid});
+        dispatch ({type: GET_DETAIL, payload: cleanVideogame});
     }};
 
 
@@ -61,7 +78,6 @@ export const getVideogamesname = (name) =>{
         const gamesbyname = apiData.data;
         dispatch ({type: GET_VIDEOGAMESNAME, payload: gamesbyname});
     }};
-
 export const getGenres = () =>{
     return async function (dispatch){
                 const apiData = await axios.get(
@@ -76,7 +92,6 @@ export const getnamesbyGenre = (value) =>{
        return ({type: GET_NAMES_BY_GENRE, payload: value})
 
 };
-
 
 export const orderByName = (payload) => {
     return {
@@ -98,6 +113,18 @@ export const orderByName = (payload) => {
       payload: status,
     };
   };
+  
   export const resetVideogames = () => {
     return { type: RESET_VIDEOGAMES };
   };
+
+  export const clear_detail = () => {
+    return { type: CLEAR_DETAIL , payload : {}};
+  };
+
+  export const set_Currents_Page = () =>{
+    return { type: SET_CURRENT_PAGE , }
+  }
+  export const Pagination = () =>{
+    return { type: PAGINATION , payload : {}}
+  }

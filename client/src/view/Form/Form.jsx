@@ -5,12 +5,17 @@ import { useSelector } from "react-redux";
 import { getGenres } from "../../redux/actions";
 import { useDispatch } from "react-redux";
 
-//ese value quiero que tome el valor de el estado por supuesto, por eso, form.name y esas cosas.
+
 const Form = () =>{
     const genres = useSelector(({genres}) => genres);
     const dispatch = useDispatch();
-    console.log(genres)
    
+   
+
+    // ----------------------------------------STATES ---------------------------------------------------
+
+
+    
     const [ratingError, setRatingError] = useState('');
     const [form , setForm] = useState({
         name: '',
@@ -22,13 +27,7 @@ const Form = () =>{
         rating: '',
 
      })
-     useEffect(() =>{
-       
-        dispatch(getGenres());
-    }, []);
-
-
-    const [error, setError] = useState({
+     const [error, setError] = useState({
         name: '',
         description:'',
         genres:[],
@@ -39,9 +38,22 @@ const Form = () =>{
 
     })
 
+
+
+    //  -----------------------------------USE EFFECTS------------------------------------------------------
+     useEffect(() =>{
+       
+        dispatch(getGenres());
+    }, []);
+
+
+    
+// -----------------------------------------VALIDATIONS-----------------------------------------------------
+    
+
     const validate = (form) => {
         if (/^[a-zA-Z\s-]+$/.test(form.name)) {
-          console.log('El nombre esta correcto')
+          
         } else {
             setError({...error, name: 'Hay un error en el name'})
         }
@@ -53,9 +65,14 @@ const Form = () =>{
     if (form.rating > 5.0) {
       ratingError = 'El rating no puede ser mayor a 5.0';
     }
+    
     setRatingError(ratingError);
     return ratingError === '';
       };
+
+    //   ------------------------------------------EVENTOS-----------------------------------------------
+
+
 
       const changePlatforms = (event) =>{
     
@@ -64,7 +81,7 @@ const Form = () =>{
       }
 
       const changeGenres = (event) =>{
-    
+        console.log(event.target.value)
         setForm ({...form, genres :[...form.genres, event.target.value]})       //para poder modificar la propiedad property por el valor de mi nuevo estado.
         
        
@@ -78,12 +95,15 @@ setForm ({...form, [property]: value})
     validate({...form, [property]:value})
 }
 
-    const submitHandler = (event)=>{
+    const submitHandler = async (event)=>{
     event.preventDefault()
-    axios.post('http://localhost:3001/videogames',form)
+    await axios.post('http://localhost:3001/videogames',form)
     .then(res => alert('Juego Creado con Exito'))
     .catch(err=> console.log(err))
     }
+
+
+
     const deletePlatform = (index) => {
         const platforms = [...form.platforms];
         platforms.splice(index, 1);
@@ -94,6 +114,14 @@ setForm ({...form, [property]: value})
         genres.splice(index, 1);
         setForm({...form, genres});
     }
+
+
+
+
+
+
+    
+    const validForm = form.name && form.description && form.platforms.length && form.genres.length && form.image && form.rating;
 
     return(  
         <div className={Style.content}>
@@ -108,7 +136,7 @@ setForm ({...form, [property]: value})
         
     
         <div>
-        <label className={Style.valores}>Description: </label>
+        <label className={Style.description}>Description: </label>
         <input type="text" value={form.description} onChange={changeHandler} name="description"/>
         </div>
 
@@ -121,6 +149,7 @@ setForm ({...form, [property]: value})
         <option value='Xbox Series S/X'>Xbox Series S/X</option>
         <option value='PlayStation 4'>PlayStation 4</option>
         <option value='PlayStation 3'>PlayStation 3</option>
+        <option value='PlayStation 3'>PC</option>
         <option value='Xbox One'>Xbox One</option>
         </select>
         
@@ -168,8 +197,8 @@ setForm ({...form, [property]: value})
         <input type="text" value={form.rating} onChange={changeHandler} name="rating"/>
         {ratingError && <div className={Style.error}>{ratingError}</div>}
         </div>
-
-        <button type="submit" className={Style.boton}>Agregar</button>
+            
+        {validForm ? <button type="submit" className={Style.boton}>Agregar</button> : null}
     
     </form>
     </div>

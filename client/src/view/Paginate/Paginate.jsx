@@ -1,6 +1,7 @@
 
 import React from "react";
 import style from './Paginate.module.css' 
+import Loading from "../Loading/Loading";
 
 
 function Paginado({ gamesPerPage, videogames, paginado }) {
@@ -12,14 +13,15 @@ function Paginado({ gamesPerPage, videogames, paginado }) {
     return (
       <nav>
         <div className={style.paginado}>
-          {pageNumbers.map((number) => (
-            <div key={number} className={style.number}>
-
-              {/* le paso al paginado el numero de pagina */}
-              <a className={style.link} href="#" onClick={() => paginado(number)}>{number}
-              </a>
-            </div>
-          ))}
+        {pageNumbers.length ? pageNumbers.map((number) => (
+  <div key={number} className={style.number}>
+    {/* le paso al paginado el numero de pagina */}
+    <a className={style.link} href="#" onClick={() => paginado(number)}>
+      {number}
+    </a>
+  </div>
+)) : <Loading/>}
+         
         </div>
       </nav>
     );

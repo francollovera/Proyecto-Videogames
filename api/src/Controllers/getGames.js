@@ -32,17 +32,28 @@ const getGames = async () => {
 };
 
 const databaseGames = async () =>{
-return await Videogame.findAll({
-  include : { model: Genres, attributes: ['name'], through: {attributes: []}, attributes: {exclude: ['updatedAt', 'createdAt', 'id']}}
+  
+  return await Videogame.findAll({
+    include: {
+        model: Genres,
+        attributes: ['name'], 
+        through: {
+            attributes: [],
+        },
+    }
 })
-
+  
 }
+
+
 const concat = async () => {
 const dataApi = await getGames()
 const datadb = await databaseGames()
 const alldata = [...dataApi, ...datadb];
+console.log(datadb)
 return alldata;
 }
+
 
 module.exports = { concat };
 

@@ -18,7 +18,7 @@ function Detail  (){
       //actualiza el getDetail con el detalle de el videojuego
     
     }, [dispatch,params.id])
-    
+      //si cualquiera de estos valores cambia, se ejecuta el dispatch con los valores nuevos de params.id y se ejectuara
     return(
       <>
       {Detallejuego.length > 0 ? (
@@ -39,9 +39,9 @@ function Detail  (){
             </div>
           ))}
         </div>
-      ) : (
+      ) : 
         <Loading></Loading>
-      )}
+      }
     </>
     )}
 
