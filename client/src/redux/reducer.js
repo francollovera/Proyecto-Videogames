@@ -76,18 +76,18 @@ const rootReducer = (state = initialState, action) => {
 
         case ORDER_BY_NAME:
             let sortedArr = action.payload === 'asc' ?
-                state.videogames.sort(function (a, b) {
+                state.videogames.slice().sort(function (a, b) {
 
                     //metodo sort: ordena los elementos de forma ascendente o descendiente conun criterio especifico
                     //ORDEN Z-A
 
-                    if (a.name > b.name) {  return 1 } // si este numero es positivo, b.name deberia estar primero
+                    if (a.name > b.name) { return 1 } // si este numero es positivo, b.name deberia estar primero
                     if (b.name > a.name) {return -1 }
                     return 0;
                 }) :
 
                 //ORDEN A-Z
-                state.videogames.sort(function (a, b) {
+                state.videogames.slice().sort(function (a, b) {
                     if (a.name > b.name) { return -1 }
                     if (b.name > a.name) { return 1 }
                     return 0;
@@ -96,14 +96,15 @@ const rootReducer = (state = initialState, action) => {
                 ...state,
                 videogames: sortedArr
             }
+            
         case ORDER_BY_RATING:
             let sArr = action.payload === 'asd' ?
-                state.videogames.sort(function (a, b) {
+                state.videogames.slice().sort(function (a, b) {
                     if (a.rating > b.rating) { return 1 }
                     if (b.rating > a.rating) { return -1 }
                     return 0;
                 }) :
-                state.videogames.sort(function (a, b) {
+                state.videogames.slice().sort(function (a, b) {
                     if (a.rating > b.rating) { return -1 }
                     if (b.rating > a.rating) { return 1 }
                     return 0;
