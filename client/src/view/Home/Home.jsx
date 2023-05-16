@@ -53,9 +53,9 @@ const Home = () => {
   }, [dispatch]);
 
   
-  // useEffect(() => {
-  //   dispatch(resetVideogames());
-  // }, [dispatch]);
+  useEffect(() => {
+    dispatch(resetVideogames());
+  }, [dispatch]);
 
   useEffect(() => {
     dispatch(clear_detail());

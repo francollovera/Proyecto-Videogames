@@ -1,9 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
 .container{
     background-image: url('./imagenes/desktop-1280x1024.jpg');
+    width: 100%;
     background-repeat: no-repeat;
     background-size: cover;
-    position: relative; /* Necesario para el posicionamiento absoluto de los elementos internos */
+    overflow: auto;
 }
 
 .overlay {

@@ -31,8 +31,9 @@
   .container:hover {
     transform: translateY(5px);
     background: linear-gradient(45deg, #797473, #63201b);
-    transition: transform 0.5s ease-in-out, background 1.5s ease-in-out;
+    transition: transform 1s ease-in-out, background 1.5s ease-in-out;
     box-shadow: 0px 10px 10px rgba(0, 0, 0, 10px);
+    height: 300px;
     
     
     
@@ -54,4 +55,22 @@
     text-shadow: 0 0 5px rgb(19, 18, 18);
     transition: transform 0.5s ease-in-out, background 1.5s ease-in-out;
     cursor: pointer;
+  }
+  .estrella{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    top: 90%; /* Posicionar la parte de la estrella debajo del contenedor principal */
+    left: 40%;
+    margin-right: 1px;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s, opacity 0.3s ease; 
+    
+  }
+  .container:hover .estrella {
+    /* Estilos para mostrar la parte de la estrella en hover */
+    visibility: visible;
+    opacity: 1;
   }

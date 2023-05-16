@@ -112,6 +112,12 @@ const rootReducer = (state = initialState, action) => {
                 ...state,
                 videogames: sArr
             }
+
+      
+
+           
+
+           
         case ORDER_BY_ORIGIN: {
             const { allvideogames } = state;
             let response;

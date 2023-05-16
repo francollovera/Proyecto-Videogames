@@ -12,6 +12,7 @@
 }
 .container {
   background-image: url('./imagenes/consola.jpg');
+  background-position:left top;
     font-family: 'arcadia', sans-serif;
     position: relative;
   display: flex;
@@ -33,17 +34,18 @@
     }
     80% {
       opacity: 0.8;
-      transform: translateX(10px) translateY(-5px);
+      transform: translateX(30px) translateY(-5px);
     }
     100% {
       opacity: 0.5;
-      transform: translateX(0) translateY(0);
+      transform: translateX(40px) translateY(0);
     }
   }
   
-  /* Aplicamos la animación a la imagen */
+  
   .image {
     animation: move-colors 10s ease-in-out infinite;
+    animation-direction: alternate;
   }
   
   
