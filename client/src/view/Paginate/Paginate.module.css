@@ -25,3 +25,17 @@
 .link:hover{
     cursor: pointer;
 }
+.flecha{
+    width: 40px; 
+    height: 34px;
+    display: flex;
+    align-items: center;
+}
+.flecha2{
+    width: 40px; 
+    height: 34px;
+    display: flex;
+    align-items: center;
+    transform: rotate(180deg);
+    
+}

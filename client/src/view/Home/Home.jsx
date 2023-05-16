@@ -22,21 +22,21 @@ const Home = () => {
   
   
   const [orden, setOrden] = useState('')
-  const [currentePage, setCurrentPage] = useState(1); 
+  const [currentPage, setCurrentPage] = useState(1); 
   //mi pagina actual
   const [gamesPerPage, setGamesPerPage] = useState(15);
   //juegos por pagina
-  const indexofLastCard = currentePage * 15
+  const indexofLastCard = currentPage * 15
    //=15 //indice del ultimo personaje
   const indexofFirstCard = indexofLastCard - gamesPerPage;  //15-15=0 indice del primer personaje
   const currentCards = videogames.slice(indexofFirstCard, indexofLastCard); 
   //los personajes que estan en la pagina actual y le hago un 'corte' y toma una porcion dependiendo lo que yo le paso por pasarametro, en este caso el indice de la ultima card y el inidice del ultimo personaje.
 
 
-  //me pasan un numero de pagina y seteo mi pagina en ese numero de paguna
+  //me pasan un numero de pagina y seteo mi pagina en ese numero de pagina
   const paginado = (pageNumber) => {
     
-    setCurrentPage(dispatch(Pagination()))
+    // setCurrentPage(dispatch(Pagination()))
     setCurrentPage(pageNumber)
 }
     
@@ -139,6 +139,7 @@ const Home = () => {
         {
           videogames.length >15 ? <Paginado
          gamesPerPage={gamesPerPage}
+          currentPage={currentPage}
           videogames={videogames.length}
           paginado={paginado} /> : null}
      </>

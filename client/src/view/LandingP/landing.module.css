@@ -50,6 +50,7 @@
   
   
   .h1 {
+    
     position: absolute;
     top: 8%;
     left: 50%;
@@ -112,6 +113,7 @@
   
   .button {
     position: absolute;
+    
     top: 45%;
     left: 49%;
     transform: translate(-50%, -50%);
@@ -127,6 +129,7 @@
   }
   .button:hover {
     width: 170px;
+    
     box-shadow: 0 0 50px 30px rgba(43, 43, 107, 0.5);
     transition: all ease-in-out 0.8s ease-out;
     background-color:rgb(222, 214, 214);
